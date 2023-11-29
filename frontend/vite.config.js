@@ -5,7 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     proxy: {
-      "/books": "http://localhost:2401",
+      "/books":
+        "https://book-store-project-backend-i8okrc6ck-rahul-namavarams-projects.vercel.app/",
     },
   },
   plugins: [react()],
