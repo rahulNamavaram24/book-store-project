@@ -12,28 +12,29 @@ const EditBook = () => {
     const [publishYear, setPublishYear] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const {id}=useParams();
-    const {enqueueSnackbar}=useSnackbar
-    useEffect(()=>{
+    const { id } = useParams();
+    const { enqueueSnackbar } = useSnackbar
+    useEffect(() => {
         // setLoading(true);
-        axios.get(`/books/${id}`)
-        .then((response)=>{
-            // setBook(response.data.book)
-            setAuthor(response.data.book.author)
-            setPublishYear(response.data.book.publishYear)
-            setTitle(response.data.book.title)
-            // console.log(response.data.book)
-            // console.log(response.data.publishYear)
-            // console.log(response.data.title)
-            setLoading(false)
-        })
-        .catch((error)=>{
-            setLoading(false);
-            // alert("an error happened. Please check in console")
-            enqueueSnackbar(`An error occured`)
-            console.log(error);
-        })
-    },[id])
+        axios
+            .get(`https://book-store-project-backend.vercel.app/books/${id}`)
+            .then((response) => {
+                // setBook(response.data.book)
+                setAuthor(response.data.book.author);
+                setPublishYear(response.data.book.publishYear);
+                setTitle(response.data.book.title);
+                // console.log(response.data.book)
+                // console.log(response.data.publishYear)
+                // console.log(response.data.title)
+                setLoading(false);
+            })
+            .catch((error) => {
+                setLoading(false);
+                // alert("an error happened. Please check in console")
+                enqueueSnackbar(`An error occured`);
+                console.log(error);
+            });
+    }, [id])
 
     const handleEditBook = () => {
         const data = {
@@ -42,7 +43,11 @@ const EditBook = () => {
             publishYear,
         };
         setLoading(true);
-        axios.put(`/books/${id}`, data)
+        axios
+            .put(
+                `https://book-store-project-backend.vercel.app/books/${id}`,
+                data
+            )
             .then(() => {
                 setLoading(false);
                 // enqueueSnackbar(`Book edited successfully`,{varient:'success'})

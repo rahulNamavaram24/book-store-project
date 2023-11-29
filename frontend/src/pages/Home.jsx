@@ -16,7 +16,7 @@ const Home = () => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get("/books")
+            .get("https://book-store-project-backend.vercel.app/books")
             .then((response) => {
                 setBooks(response.data.books);
                 setLoading(false);
@@ -50,7 +50,7 @@ const Home = () => {
                 </Link>
             </div>
             {loading ? <Spinner /> : showType === 'table' ?
-                (<BooksTable books={books}/>) : (<BooksCard books={books} />)}
+                (<BooksTable books={books} />) : (<BooksCard books={books} />)}
         </div>
     );
 };
